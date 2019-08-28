@@ -23,8 +23,8 @@ class DataManager {
         }
     }
     
-    func getRepositories(page: Int, completion: @escaping NetworkManager.responseCallback){
-        let url = "https://api.github.com/users/JakeWharton/repos?page=\(page)&per_page=15"
+    func getRepositories(page: Int, limit: Int, completion: @escaping NetworkManager.responseCallback){
+        let url = "https://api.github.com/users/JakeWharton/repos?page=\(page)&per_page=\(limit)"
         NetworkManager.shared.get(url: url) { [unowned self] (response) in
             self.handelResponseData(response: response, model: Repository.self, completion: completion)
         }

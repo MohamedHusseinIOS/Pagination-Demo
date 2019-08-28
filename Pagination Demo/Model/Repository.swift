@@ -7,21 +7,27 @@
 //
 
 import Foundation
+import Realm
+import RealmSwift
 
 protocol BaseModel: Codable, Decoderable {}
 
 struct Repository: BaseModel {
     
-    let fullName : String?
-    let url : String?
-    let watchers : Int?
-    let watchersCount : Int?
+    let fullName: String?
+    let description: String?
+    let url: String?
+    let htmlUrl: String?
+    let watchers: Int?
+    let forks: Int?
     
     enum CodingKeys: String, CodingKey {
         case fullName
+        case description
+        case htmlUrl
         case url
         case watchers
-        case watchersCount
+        case forks
     }
 }
 

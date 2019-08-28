@@ -8,7 +8,7 @@ target 'Pagination Demo' do
   # Pods for Pagination Demo
 
 
- 	pod 'Alamofire'  	
+ 	  pod 'Alamofire'  	
   	pod 'SVProgressHUD'
   	pod 'Kingfisher', '~> 5.0'
 

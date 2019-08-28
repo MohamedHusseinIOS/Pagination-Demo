@@ -15,7 +15,7 @@ extension String{
         let range = NSRange(location: 0, length: self.count)
         let attributedString = NSMutableAttributedString(string: self)
         attributedString.addAttribute(.link, value: URL(string: link)!, range: range)
-        //attributedString.addAttribute(.font, value: UIFont(name: Constants.font.rawValue, size: fontSize)!, range: range)
+        attributedString.addAttribute(.font, value: UIFont(name: Constants.font.rawValue, size: fontSize)!, range: range)
         return attributedString
     }
     
@@ -23,7 +23,7 @@ extension String{
         let range = NSRange(location: 0, length: self.count)
         let attributedString = NSMutableAttributedString(string: self)
         attributedString.addAttribute(.foregroundColor, value: color, range: range)
-        //attributedString.addAttribute(.font, value: UIFont(name: Constants.font.rawValue, size: fontSize)!, range: range)
+        attributedString.addAttribute(.font, value: UIFont(name: Constants.font.rawValue, size: fontSize)!, range: range)
         return attributedString
     }
 

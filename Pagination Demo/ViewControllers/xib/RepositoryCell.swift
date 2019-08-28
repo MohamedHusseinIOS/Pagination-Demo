@@ -9,9 +9,13 @@
 import UIKit
 
 class RepositoryCell: UITableViewCell {
+    
+    @IBOutlet weak var watchersLbl: UILabel!
+    @IBOutlet weak var forksCountLbl: UILabel!
+    @IBOutlet weak var respositoryNameLbl: UILabel!
+    @IBOutlet weak var repositoryUrlTxt: UITextView!
+    @IBOutlet weak var descriptionLbl: UILabel!
 
-    @IBOutlet weak var respositoryName: UILabel!
-    @IBOutlet weak var repositoryUrl: UILabel!
     
     static let id = "RepositoryCell"
     
@@ -21,8 +25,12 @@ class RepositoryCell: UITableViewCell {
     }
     
     func bindOnData(_ repository: Repository){
-        respositoryName.text = repository.fullName
-        repositoryUrl.attributedText = repository.url?.clickableString(gotolink: repository.url ?? "")
+        watchersLbl.text = (repository.watchers ?? 0).description
+        forksCountLbl.text = (repository.forks ?? 0).description
+        respositoryNameLbl.text = repository.fullName
+        repositoryUrlTxt.attributedText = repository.htmlUrl?.clickableString(gotolink: repository.htmlUrl ?? "")
+        repositoryUrlTxt.linkTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.blue]
+        descriptionLbl.text = repository.description
     }
-
+    
 }

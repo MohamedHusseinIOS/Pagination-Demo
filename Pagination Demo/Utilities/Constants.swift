@@ -7,7 +7,8 @@
 //
 
 import Foundation
+import UIKit
 
 enum Constants: String {
-    case font
+    case font = "ArialMT"
 }

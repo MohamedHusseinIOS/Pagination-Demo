@@ -31,6 +31,7 @@
 		A1FFE7552315DE5C005FAE96 /* RepositoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1FFE7442315DE5C005FAE96 /* RepositoryCell.xib */; };
 		A1FFE7562315DE5C005FAE96 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFE7462315DE5C005FAE96 /* Repository.swift */; };
 		A1FFE7572315DE5C005FAE96 /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFE7472315DE5C005FAE96 /* ErrorModel.swift */; };
+		D92A3CD523168CF0005E331E /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92A3CD423168CF0005E331E /* UIViewController+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		A1FFE7462315DE5C005FAE96 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		A1FFE7472315DE5C005FAE96 /* ErrorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
 		A99EC4A79CE3D16975DCA0D3 /* Pods-Pagination DemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pagination DemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pagination DemoTests/Pods-Pagination DemoTests.release.xcconfig"; sourceTree = "<group>"; };
+		D92A3CD423168CF0005E331E /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		F2759D03D0C0744D52D2228C /* Pods_Pagination_DemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pagination_DemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2B449DEDE7CCC3BFDFE340C /* Pods-Pagination Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pagination Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pagination Demo/Pods-Pagination Demo.release.xcconfig"; sourceTree = "<group>"; };
 		F39612491EFEEA4B2A479A2C /* Pods-Pagination DemoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pagination DemoUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pagination DemoUITests/Pods-Pagination DemoUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -152,11 +154,11 @@
 		A1FFE7012315DE16005FAE96 /* Pagination Demo */ = {
 			isa = PBXGroup;
 			children = (
-				A1FFE7452315DE5C005FAE96 /* Model */,
-				A1FFE73A2315DE5C005FAE96 /* Networking */,
 				A1FFE7302315DE5C005FAE96 /* Utilities */,
+				A1FFE7452315DE5C005FAE96 /* Model */,
 				A1FFE7372315DE5C005FAE96 /* View */,
 				A1FFE73E2315DE5C005FAE96 /* ViewControllers */,
+				A1FFE73A2315DE5C005FAE96 /* Networking */,
 				A1FFE7022315DE16005FAE96 /* AppDelegate.swift */,
 				A1FFE7092315DE17005FAE96 /* Assets.xcassets */,
 				A1FFE70B2315DE17005FAE96 /* LaunchScreen.storyboard */,
@@ -195,6 +197,7 @@
 		A1FFE7322315DE5C005FAE96 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				D92A3CD423168CF0005E331E /* UIViewController+Extension.swift */,
 				A1FFE7332315DE5C005FAE96 /* DataResponse+Extension.swift */,
 				A1FFE7342315DE5C005FAE96 /* UIView+Extension.swift */,
 				A1FFE7352315DE5C005FAE96 /* String+Extension.swift */,
@@ -224,8 +227,8 @@
 		A1FFE73E2315DE5C005FAE96 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				A1FFE73F2315DE5C005FAE96 /* ViewController.swift */,
 				A1FFE7402315DE5C005FAE96 /* xib */,
+				A1FFE73F2315DE5C005FAE96 /* ViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -233,10 +236,10 @@
 		A1FFE7402315DE5C005FAE96 /* xib */ = {
 			isa = PBXGroup;
 			children = (
-				A1FFE7412315DE5C005FAE96 /* OwnerCell.swift */,
-				A1FFE7422315DE5C005FAE96 /* RepositoryCell.swift */,
 				A1FFE7432315DE5C005FAE96 /* OwnerCell.xib */,
+				A1FFE7412315DE5C005FAE96 /* OwnerCell.swift */,
 				A1FFE7442315DE5C005FAE96 /* RepositoryCell.xib */,
+				A1FFE7422315DE5C005FAE96 /* RepositoryCell.swift */,
 			);
 			path = xib;
 			sourceTree = "<group>";
@@ -426,7 +429,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Pagination Demo/Pods-Pagination Demo-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Pagination Demo/Pods-Pagination Demo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
@@ -441,7 +444,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pagination Demo/Pods-Pagination Demo-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Pagination Demo/Pods-Pagination Demo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		AEA711A5D8C0417A530D29BE /* [CP] Check Pods Manifest.lock */ = {
@@ -498,6 +501,7 @@
 				A1FFE7572315DE5C005FAE96 /* ErrorModel.swift in Sources */,
 				A1FFE7512315DE5C005FAE96 /* ViewController.swift in Sources */,
 				A1FFE7032315DE16005FAE96 /* AppDelegate.swift in Sources */,
+				D92A3CD523168CF0005E331E /* UIViewController+Extension.swift in Sources */,
 				A1FFE7492315DE5C005FAE96 /* DataResponse+Extension.swift in Sources */,
 				A1FFE7562315DE5C005FAE96 /* Repository.swift in Sources */,
 				A1FFE7532315DE5C005FAE96 /* RepositoryCell.swift in Sources */,

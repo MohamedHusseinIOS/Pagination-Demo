@@ -14,9 +14,11 @@ class ViewController: UIViewController {
     
     let headerRefreshControl = UIRefreshControl()
     let footerProgressView = UIProgressView()
+    let limitPerPage = 15
     var repositories = [Repository]()
-    
+    var newPageRepos = [Repository]()
     var pageNum = 1
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +26,7 @@ class ViewController: UIViewController {
         
         respositoriesTableView.dataSource = self
         respositoriesTableView.delegate = self
-        respositoriesTableView.tableHeaderView = headerRefreshControl
+        //respositoriesTableView.tableHeaderView = headerRefreshControl
         respositoriesTableView.tableFooterView = footerProgressView
         
         getRepositories()
@@ -36,13 +38,16 @@ class ViewController: UIViewController {
     }
     
     func getRepositories(){
-        DataManager.shared.getRepositories(page: pageNum, completion: { (response) in
+        DataManager.shared.getRepositories(page: pageNum, limit: limitPerPage, completion: { (response) in
             self.footerProgressView.isHidden = true
             switch response {
             case .success(let value):
                 guard let repositories = value as? [Repository] else { return }
+                //self.newPageRepos = repositories
+                let lastIndex = repositories.count == 0 ? -1 : repositories.count - 1
                 self.repositories.append(contentsOf: repositories)
                 self.respositoriesTableView.reloadData()
+                self.addNewReposToTableView(newRepos: repositories, lastIndex: lastIndex)
                 self.pageNum += 1
             case .failure(let apiError, let data):
                 self.handleError(apiError: apiError, errotData: data)
@@ -51,7 +56,31 @@ class ViewController: UIViewController {
     }
     
     func handleError(apiError: ApiError?, errotData: Any?){
-        //
+        if let err = errotData as? ErrorModel{
+            self.alert(title: "", message: err.message, completion: nil)
+        }else if let errorArr = errotData as? [ErrorModel], let err = errorArr.first {
+            self.alert(title: "", message: err.message, completion: nil)
+        }
+
+    }
+    
+    func addNewReposToTableView(newRepos: [Repository], lastIndex: Int){
+        self.newPageRepos = newRepos
+        var indexs = [IndexPath]()
+        for i in (lastIndex + 1)..<newRepos.count{
+            indexs.append(IndexPath(row: i, section: 0))
+        }
+        respositoriesTableView.performBatchUpdates({
+            self.respositoriesTableView.insertRows(at: indexs, with: .automatic)
+        }) { (completed) in
+            //Code
+        }
+    }
+    
+    func getNewReposPage(){
+        self.footerProgressView.isHidden = false
+        self.footerProgressView.setProgress(100, animated: true)
+        self.getRepositories()
     }
 }
 
@@ -70,5 +99,9 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate{
         return cell
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard newPageRepos.count == limitPerPage && indexPath.row == repositories.count - 4 else { return }
+        getNewReposPage()
+    }
 }
 
