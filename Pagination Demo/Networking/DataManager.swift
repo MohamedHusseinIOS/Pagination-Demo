@@ -7,9 +7,12 @@
 //
 
 import Foundation
+import Reachability
 
 class DataManager {
+    
     static let shared = DataManager()
+    
     private init(){}
     
     func handelResponseData<T: BaseModel>( response: ResponseEnum, model: T.Type, completion: @escaping NetworkManager.responseCallback){
@@ -23,8 +26,21 @@ class DataManager {
         }
     }
     
+    func getDataFormDB<T: Codable>(key: Stored, model: T.Type, completion: @escaping NetworkManager.responseCallback){
+        do{
+            let model = try StorageManager.shared.fetchData(for: key.rawValue) as T
+            completion(.success(model))
+        } catch let error {
+            completion(.failure(nil, ErrorModel(message: error.localizedDescription)))
+        }
+    }
+    
     func getRepositories(page: Int, limit: Int, completion: @escaping NetworkManager.responseCallback){
         let url = "https://api.github.com/users/JakeWharton/repos?page=\(page)&per_page=\(limit)"
+        guard ReachabilityUtility.shared.isReachable else {
+            getDataFormDB(key: .Repos, model: Repositories.self, completion: completion)
+            return
+        }
         NetworkManager.shared.get(url: url) { [unowned self] (response) in
             self.handelResponseData(response: response, model: Repository.self, completion: completion)
         }

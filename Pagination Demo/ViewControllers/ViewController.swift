@@ -26,48 +26,57 @@ class ViewController: UIViewController {
         
         respositoriesTableView.dataSource = self
         respositoriesTableView.delegate = self
-        //respositoriesTableView.tableHeaderView = headerRefreshControl
+        respositoriesTableView.tableHeaderView = headerRefreshControl
         respositoriesTableView.tableFooterView = footerProgressView
+        
+        headerRefreshControl.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
         
         getRepositories()
     }
     
-    func registerCell(){
+    func registerCell() {
         let nib = UINib(nibName: RepositoryCell.id, bundle: nil)
         respositoriesTableView.register(nib, forCellReuseIdentifier: RepositoryCell.id)
     }
     
-    func getRepositories(){
+    func getRepositories() {
         DataManager.shared.getRepositories(page: pageNum, limit: limitPerPage, completion: { (response) in
             self.footerProgressView.isHidden = true
             switch response {
             case .success(let value):
-                guard let repositories = value as? [Repository] else { return }
-                //self.newPageRepos = repositories
-                let lastIndex = repositories.count == 0 ? -1 : repositories.count - 1
-                self.repositories.append(contentsOf: repositories)
-                self.respositoriesTableView.reloadData()
-                self.addNewReposToTableView(newRepos: repositories, lastIndex: lastIndex)
-                self.pageNum += 1
+                self.headerRefreshControl.endRefreshing()
+                if let repositories = value as? [Repository] {
+                    self.handleResponseSuccess(repos: repositories)
+                } else if let reposRes = value as? Repositories, let repos = reposRes.repositories {
+                    self.handleResponseSuccess(repos: repos)
+                }
             case .failure(let apiError, let data):
                 self.handleError(apiError: apiError, errotData: data)
             }
         })
     }
     
-    func handleError(apiError: ApiError?, errotData: Any?){
+    func handleResponseSuccess(repos: [Repository]){
+        let lastIndex = repos.count == 0 ? -1 : repos.count - 1
+        self.repositories.append(contentsOf: repos)
+        self.storeReposInApp(repos: self.repositories)
+        self.respositoriesTableView.reloadData()
+        self.addNewReposToTableView(newRepos: repos, lastIndex: lastIndex)
+        self.pageNum += 1
+    }
+    
+    func handleError(apiError: ApiError?, errotData: Any?) {
         if let err = errotData as? ErrorModel{
             self.alert(title: "", message: err.message, completion: nil)
-        }else if let errorArr = errotData as? [ErrorModel], let err = errorArr.first {
+        } else if let errorArr = errotData as? [ErrorModel], let err = errorArr.first {
             self.alert(title: "", message: err.message, completion: nil)
         }
-
     }
     
     func addNewReposToTableView(newRepos: [Repository], lastIndex: Int){
         self.newPageRepos = newRepos
         var indexs = [IndexPath]()
-        for i in (lastIndex + 1)..<newRepos.count{
+        for i in (lastIndex + 1)..<newRepos.count {
             indexs.append(IndexPath(row: i, section: 0))
         }
         respositoriesTableView.performBatchUpdates({
@@ -81,6 +90,20 @@ class ViewController: UIViewController {
         self.footerProgressView.isHidden = false
         self.footerProgressView.setProgress(100, animated: true)
         self.getRepositories()
+    }
+    
+    func storeReposInApp(repos: [Repository]){
+        do {
+            try StorageManager.shared.saveData(data: Repositories(repositories: repos), for: Stored.Repos.rawValue)
+        } catch let error {
+            self.alert(title: "", message: error.localizedDescription, completion: nil)
+        }
+    }
+
+    @objc func refreshTableView(){
+        pageNum = 1
+        repositories.removeAll()
+        getRepositories()
     }
 }
 

@@ -32,6 +32,11 @@
 		A1FFE7562315DE5C005FAE96 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFE7462315DE5C005FAE96 /* Repository.swift */; };
 		A1FFE7572315DE5C005FAE96 /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFE7472315DE5C005FAE96 /* ErrorModel.swift */; };
 		D92A3CD523168CF0005E331E /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92A3CD423168CF0005E331E /* UIViewController+Extension.swift */; };
+		D92DD4F62317BAB500912E0F /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92DD4F52317BAB500912E0F /* Storable.swift */; };
+		D92DD4F82317BCCA00912E0F /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92DD4F72317BCCA00912E0F /* DiskStorage.swift */; };
+		D92DD4FA2317BDF400912E0F /* CodableStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92DD4F92317BDF400912E0F /* CodableStorage.swift */; };
+		D92DD4FC2317BFEB00912E0F /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92DD4FB2317BFEB00912E0F /* StorageManager.swift */; };
+		D92DD4FE2317F9AD00912E0F /* ReachabilityUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92DD4FD2317F9AD00912E0F /* ReachabilityUtility.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +91,11 @@
 		A1FFE7472315DE5C005FAE96 /* ErrorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
 		A99EC4A79CE3D16975DCA0D3 /* Pods-Pagination DemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pagination DemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pagination DemoTests/Pods-Pagination DemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		D92A3CD423168CF0005E331E /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		D92DD4F52317BAB500912E0F /* Storable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
+		D92DD4F72317BCCA00912E0F /* DiskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStorage.swift; sourceTree = "<group>"; };
+		D92DD4F92317BDF400912E0F /* CodableStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableStorage.swift; sourceTree = "<group>"; };
+		D92DD4FB2317BFEB00912E0F /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		D92DD4FD2317F9AD00912E0F /* ReachabilityUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityUtility.swift; sourceTree = "<group>"; };
 		F2759D03D0C0744D52D2228C /* Pods_Pagination_DemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pagination_DemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2B449DEDE7CCC3BFDFE340C /* Pods-Pagination Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pagination Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pagination Demo/Pods-Pagination Demo.release.xcconfig"; sourceTree = "<group>"; };
 		F39612491EFEEA4B2A479A2C /* Pods-Pagination DemoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pagination DemoUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pagination DemoUITests/Pods-Pagination DemoUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -189,7 +199,9 @@
 			isa = PBXGroup;
 			children = (
 				A1FFE7312315DE5C005FAE96 /* Constants.swift */,
+				D92DD4F42317B9BB00912E0F /* Storing */,
 				A1FFE7322315DE5C005FAE96 /* Extensions */,
+				D92DD4FB2317BFEB00912E0F /* StorageManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -220,6 +232,7 @@
 				A1FFE73B2315DE5C005FAE96 /* DataManager.swift */,
 				A1FFE73C2315DE5C005FAE96 /* NetworkManager.swift */,
 				A1FFE73D2315DE5C005FAE96 /* Decoderable.swift */,
+				D92DD4FD2317F9AD00912E0F /* ReachabilityUtility.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -264,6 +277,16 @@
 				3A01BD24B2309E7ED5D8E471 /* Pods-Pagination DemoUITests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		D92DD4F42317B9BB00912E0F /* Storing */ = {
+			isa = PBXGroup;
+			children = (
+				D92DD4F52317BAB500912E0F /* Storable.swift */,
+				D92DD4F72317BCCA00912E0F /* DiskStorage.swift */,
+				D92DD4F92317BDF400912E0F /* CodableStorage.swift */,
+			);
+			path = Storing;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -432,6 +455,7 @@
 				"${PODS_ROOT}/Target Support Files/Pods-Pagination Demo/Pods-Pagination Demo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -440,6 +464,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -501,12 +526,17 @@
 				A1FFE7572315DE5C005FAE96 /* ErrorModel.swift in Sources */,
 				A1FFE7512315DE5C005FAE96 /* ViewController.swift in Sources */,
 				A1FFE7032315DE16005FAE96 /* AppDelegate.swift in Sources */,
+				D92DD4F82317BCCA00912E0F /* DiskStorage.swift in Sources */,
 				D92A3CD523168CF0005E331E /* UIViewController+Extension.swift in Sources */,
 				A1FFE7492315DE5C005FAE96 /* DataResponse+Extension.swift in Sources */,
+				D92DD4F62317BAB500912E0F /* Storable.swift in Sources */,
+				D92DD4FC2317BFEB00912E0F /* StorageManager.swift in Sources */,
 				A1FFE7562315DE5C005FAE96 /* Repository.swift in Sources */,
 				A1FFE7532315DE5C005FAE96 /* RepositoryCell.swift in Sources */,
 				A1FFE74A2315DE5C005FAE96 /* UIView+Extension.swift in Sources */,
+				D92DD4FA2317BDF400912E0F /* CodableStorage.swift in Sources */,
 				A1FFE74E2315DE5C005FAE96 /* DataManager.swift in Sources */,
+				D92DD4FE2317F9AD00912E0F /* ReachabilityUtility.swift in Sources */,
 				A1FFE74F2315DE5C005FAE96 /* NetworkManager.swift in Sources */,
 				A1FFE74B2315DE5C005FAE96 /* String+Extension.swift in Sources */,
 				A1FFE7482315DE5C005FAE96 /* Constants.swift in Sources */,

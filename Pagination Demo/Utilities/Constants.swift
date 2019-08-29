@@ -12,3 +12,7 @@ import UIKit
 enum Constants: String {
     case font = "ArialMT"
 }
+
+enum Stored: String {
+    case Repos
+}

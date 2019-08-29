@@ -7,10 +7,22 @@
 //
 
 import Foundation
-import Realm
-import RealmSwift
 
 protocol BaseModel: Codable, Decoderable {}
+
+struct Repositories: BaseModel {
+    
+    let repositories: [Repository]?
+    
+    enum CodingKeys: String, CodingKey {
+        case repositories
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(repositories.self, forKey: .repositories)
+    }
+}
 
 struct Repository: BaseModel {
     
@@ -28,6 +40,17 @@ struct Repository: BaseModel {
         case url
         case watchers
         case forks
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(fullName, forKey: .fullName)
+        try container.encode(description, forKey: .description)
+        try container.encode(url, forKey: .url)
+        try container.encode(htmlUrl, forKey: .htmlUrl)
+        try container.encode(watchers, forKey: .watchers)
+        try container.encode(forks, forKey: .forks)
     }
 }
 

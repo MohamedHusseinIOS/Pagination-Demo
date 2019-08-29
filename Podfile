@@ -11,6 +11,7 @@ target 'Pagination Demo' do
  	  pod 'Alamofire'  	
   	pod 'SVProgressHUD'
   	pod 'Kingfisher', '~> 5.0'
+    pod 'ReachabilitySwift'
 
   target 'Pagination DemoTests' do
     inherit! :search_paths
