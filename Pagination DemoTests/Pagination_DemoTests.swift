@@ -30,5 +30,34 @@ class Pagination_DemoTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    
+    func testStorage() {
+        // Given
+        let givenRepos = Repositories(repositories: [Repository(fullName: "test",
+                                                           description: "testtest",
+                                                           url: "www.google.com",
+                                                           htmlUrl: "www.google.com",
+                                                           watchers: 10,
+                                                           forks: 2)])
+        
+        // When
+        do {
+            try StorageManager.shared.saveData(data: givenRepos, for: Stored.Repos.rawValue)
+        } catch let error {
+            let error = XCTestError(_nsError: error as NSError)
+            XCTFail(error.localizedDescription)
+        }
+        
+        // Then
+        do {
+            let repos = try StorageManager.shared.fetchData(for: Stored.Repos.rawValue) as Repositories
+            XCTAssertEqual(repos.repositories?.first?.fullName, givenRepos.repositories?.first?.fullName)
+        } catch let error {
+            let error = XCTestError(_nsError: error as NSError)
+            XCTFail(error.localizedDescription)
+        }
+    }
+    
+    
 
 }

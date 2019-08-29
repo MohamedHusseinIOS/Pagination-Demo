@@ -15,7 +15,7 @@ class DataManager {
     
     private init(){}
     
-    func handelResponseData<T: BaseModel>( response: ResponseEnum, model: T.Type, completion: @escaping NetworkManager.responseCallback){
+    private func handelResponseData<T: BaseModel>( response: ResponseEnum, model: T.Type, completion: @escaping NetworkManager.responseCallback){
         switch response {
         case .success(let value):
             guard let value = value else { return }
@@ -26,7 +26,7 @@ class DataManager {
         }
     }
     
-    func getDataFormDB<T: Codable>(key: Stored, model: T.Type, completion: @escaping NetworkManager.responseCallback){
+    private func getDataFormDB<T: Codable>(key: Stored, model: T.Type, completion: @escaping NetworkManager.responseCallback){
         do{
             let model = try StorageManager.shared.fetchData(for: key.rawValue) as T
             completion(.success(model))

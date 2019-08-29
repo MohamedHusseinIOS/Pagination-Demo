@@ -40,15 +40,15 @@ class ViewController: UIViewController {
     }
     
     func getRepositories() {
-        DataManager.shared.getRepositories(page: pageNum, limit: limitPerPage, completion: { (response) in
+        DataManager.shared.getRepositories(page: pageNum, limit: limitPerPage, completion: {[unowned self] (response) in
             self.footerProgressView.isHidden = true
             switch response {
             case .success(let value):
                 self.headerRefreshControl.endRefreshing()
                 if let repositories = value as? [Repository] {
-                    self.handleResponseSuccess(repos: repositories)
+                    self.handleSuccessResponse(repos: repositories)
                 } else if let reposRes = value as? Repositories, let repos = reposRes.repositories {
-                    self.handleResponseSuccess(repos: repos)
+                    self.handleSuccessResponse(repos: repos)
                 }
             case .failure(let apiError, let data):
                 self.handleError(apiError: apiError, errotData: data)
@@ -56,7 +56,7 @@ class ViewController: UIViewController {
         })
     }
     
-    func handleResponseSuccess(repos: [Repository]){
+    func handleSuccessResponse(repos: [Repository]){
         let lastIndex = repos.count == 0 ? -1 : repos.count - 1
         self.repositories.append(contentsOf: repos)
         self.storeReposInApp(repos: self.repositories)
