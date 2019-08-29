@@ -25,7 +25,7 @@ class ReachabilityUtility {
             print("Unable to start notifier")
         }
         
-        //isReachable = reachability?.connection == .some(.cellular) || reachability?.connection == .some(.wifi)
+        isReachable = reachability?.connection == .some(.cellular) || reachability?.connection == .some(.wifi)
         
         reachability?.whenReachable = { [unowned self] reachability in
             self.isReachable = true

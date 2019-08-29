@@ -202,6 +202,7 @@
 				D92DD4F42317B9BB00912E0F /* Storing */,
 				A1FFE7322315DE5C005FAE96 /* Extensions */,
 				D92DD4FB2317BFEB00912E0F /* StorageManager.swift */,
+				D92DD4FD2317F9AD00912E0F /* ReachabilityUtility.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -229,10 +230,8 @@
 		A1FFE73A2315DE5C005FAE96 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				A1FFE73B2315DE5C005FAE96 /* DataManager.swift */,
 				A1FFE73C2315DE5C005FAE96 /* NetworkManager.swift */,
-				A1FFE73D2315DE5C005FAE96 /* Decoderable.swift */,
-				D92DD4FD2317F9AD00912E0F /* ReachabilityUtility.swift */,
+				A1FFE73B2315DE5C005FAE96 /* DataManager.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -260,6 +259,7 @@
 		A1FFE7452315DE5C005FAE96 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A1FFE73D2315DE5C005FAE96 /* Decoderable.swift */,
 				A1FFE7462315DE5C005FAE96 /* Repository.swift */,
 				A1FFE7472315DE5C005FAE96 /* ErrorModel.swift */,
 			);
