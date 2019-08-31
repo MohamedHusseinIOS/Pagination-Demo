@@ -72,9 +72,27 @@ class ViewController: UIViewController {
     
     func handleError(apiError: ApiError?, errotData: Any?) {
         if let err = errotData as? ErrorModel{
-            self.alert(title: "", message: err.message, completion: nil)
+            self.alert(title: "", message: err.message, completion: {
+                self.getReposFormDb()
+            })
         } else if let errorArr = errotData as? [ErrorModel], let err = errorArr.first {
-            self.alert(title: "", message: err.message, completion: nil)
+            self.alert(title: "", message: err.message, completion: {
+               self.getReposFormDb()
+            })
+        }
+    }
+    
+    func getReposFormDb(){
+        DataManager.shared.getDataFormDB(key: .Repos, model: Repositories.self) { (response) in
+            switch response {
+            case .success(let value):
+                self.headerRefreshControl.endRefreshing()
+                guard let reposRes = value as? Repositories, let repos = reposRes.repositories  else { return }
+                self.handleSuccessResponse(repos: repos)
+            case .failure( _, let data):
+                guard let err = data as? ErrorModel else { return }
+                self.alert(title: "", message: err.message, completion: nil)
+            }
         }
     }
     

@@ -26,7 +26,7 @@ class DataManager {
         }
     }
     
-    private func getDataFormDB<T: Codable>(key: Stored, model: T.Type, completion: @escaping NetworkManager.responseCallback){
+    func getDataFormDB<T: Codable>(key: Stored, model: T.Type, completion: @escaping NetworkManager.responseCallback){
         do{
             let model = try StorageManager.shared.fetchData(for: .Repos) as T
             completion(.success(model))
