@@ -2,7 +2,7 @@
 //  AppUtility.swift
 //  Pagination Demo
 //
-//  Created by mohamed on 8/29/19.
+//  Created by Mohamed Hussien on 8/29/19.
 //  Copyright © 2019 HNF. All rights reserved.
 //
 
@@ -22,11 +22,11 @@ class StorageManager {
         storage = CodableStorage(storage: disk)
     }
     
-    func saveData<T: Codable>(data: T, for key: String) throws {
-        try storage.save(data, for: key)
+    func saveData<T: Codable>(data: T, for key: Stored) throws {
+        try storage.save(data, for: key.rawValue)
     }
     
-    func fetchData<T: Codable>(for key: String) throws -> T {
-        return try storage.fetch(for: key)
+    func fetchData<T: Codable>(for key: Stored) throws -> T {
+        return try storage.fetch(for: key.rawValue)
     }
 }

@@ -28,7 +28,7 @@ class DataManager {
     
     private func getDataFormDB<T: Codable>(key: Stored, model: T.Type, completion: @escaping NetworkManager.responseCallback){
         do{
-            let model = try StorageManager.shared.fetchData(for: key.rawValue) as T
+            let model = try StorageManager.shared.fetchData(for: .Repos) as T
             completion(.success(model))
         } catch let error {
             completion(.failure(nil, ErrorModel(message: error.localizedDescription)))

@@ -12,6 +12,8 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var respositoriesTableView: UITableView!
     
+    static let id = "ViewController"
+    
     let headerRefreshControl = UIRefreshControl()
     let footerProgressView = UIProgressView()
     let limitPerPage = 15
@@ -19,11 +21,11 @@ class ViewController: UIViewController {
     var newPageRepos = [Repository]()
     var pageNum = 1
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         registerCell()
         
+        respositoriesTableView.accessibilityIdentifier = "tvRepos"
         respositoriesTableView.dataSource = self
         respositoriesTableView.delegate = self
         respositoriesTableView.tableHeaderView = headerRefreshControl
@@ -94,7 +96,7 @@ class ViewController: UIViewController {
     
     func storeReposInApp(repos: [Repository]){
         do {
-            try StorageManager.shared.saveData(data: Repositories(repositories: repos), for: Stored.Repos.rawValue)
+            try StorageManager.shared.saveData(data: Repositories(repositories: repos), for: .Repos)
         } catch let error {
             self.alert(title: "", message: error.localizedDescription, completion: nil)
         }
