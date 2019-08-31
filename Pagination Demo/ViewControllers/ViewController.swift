@@ -25,6 +25,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         registerCell()
         
+        footerProgressView.tintColor = UIColor.blue
+        footerProgressView.trackTintColor = UIColor.gray
         respositoriesTableView.accessibilityIdentifier = "tvRepos"
         respositoriesTableView.dataSource = self
         respositoriesTableView.delegate = self
@@ -43,6 +45,7 @@ class ViewController: UIViewController {
     
     func getRepositories() {
         DataManager.shared.getRepositories(page: pageNum, limit: limitPerPage, completion: {[unowned self] (response) in
+            self.footerProgressView.progress = 100
             self.footerProgressView.isHidden = true
             switch response {
             case .success(let value):
@@ -90,6 +93,7 @@ class ViewController: UIViewController {
     
     func getNewReposPage(){
         self.footerProgressView.isHidden = false
+        self.footerProgressView.progress = 0
         self.footerProgressView.setProgress(100, animated: true)
         self.getRepositories()
     }
